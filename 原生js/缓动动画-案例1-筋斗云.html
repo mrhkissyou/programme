@@ -1,0 +1,100 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        body {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .box {
+            width: 800px;
+            height: 42px;
+            position: relative;
+            margin: 100px auto;
+            background: #fff url("images/wifi.png") no-repeat right center;
+            border-radius: 10px;
+        }
+        ul {
+            position: relative;
+            z-index: 111;
+        }
+        li {
+            float: left;
+            text-align: center;
+            line-height: 42px;
+            width: 83px;
+            cursor: pointer;
+        }
+        span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 83px;
+            height: 42px;
+            background: url("images/cloud.gif") no-repeat;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            var liArr=document.getElementsByTagName("li");
+            var span=document.getElementsByTagName("span")[0];
+            var spanWidth=span.scrollWidth;
+            var count=0;
+            for(var i=0;i<liArr.length;i++){
+                liArr[i].index=i;
+                liArr[i].onmouseover=function () {
+                    animate(span,this.index*spanWidth)
+
+                }
+                liArr[i].onmouseout=function () {
+                    animate(span,count*spanWidth)
+                }
+                liArr[i].onclick=function () {
+                   count=this.index;
+                }
+            }
+
+
+
+            function animate(ele,target) {
+                clearInterval(ele.timer);
+                ele.timer=setInterval(function () {
+                    var step=(target-ele.offsetLeft)/10;
+                    step=step>0?Math.ceil(step):Math.floor(step);
+                    ele.style.left=ele.offsetLeft+step+"px";
+                    if (Math.abs(target-ele.offsetLeft)<=Math.abs(step)){
+                        ele.style.left=target+"px";
+                        clearInterval(ele.timer);
+                    }
+                },30)
+            }
+
+        }
+    </script>
+</head>
+<body>
+
+    <div class="box">
+        <ul>
+            <li>首页新闻</li>
+            <li>师资力量</li>
+            <li>活动策划</li>
+            <li>企业文化</li>
+            <li>招聘信息</li>
+            <li>公司简介</li>
+            <li>上海校区</li>
+            <li>广州校区</li>
+        </ul>
+        <span></span>
+    </div>
+
+
+
+</body>
+</html>
