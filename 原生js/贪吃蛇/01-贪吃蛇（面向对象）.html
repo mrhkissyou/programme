@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .map {
+            width: 800px;
+            height: 600px;
+            position: relative;
+            background-color: #ccc;
+        }
+    </style>
+    <script src="Food.js"></script>
+    <script src="Snake.js"></script>
+    <script src="Game.js"></script>
+    <script>
+        window.onload = function () {
+            //需求: 小蛇向前移动(定时器)，按键可以改变方向，吃食物身体变长;
+                //思路1: 蛇移动: 删除旧蛇画一条新蛇;
+                //思路2: 按键可以改变方向: 按上下左右给蛇的top/left值+1/-1食物宽度;
+                //思路3: 吃食物身体变长: 给蛇的身体在加一部分(最好是原来身体的最末尾一部分);
+
+            //步骤:
+            //1.创建一个食物对象;(宽高-位置-背景色)
+                //a.要有初始化食物的方法;
+                //b.要能够删除食物的方法;(吃了食物要变没，然后产出新的食物)
+            //2.创建一个小蛇对象;(宽高-位置-背景色-身体分为几部分)-分身体就是为了拐弯儿;
+                //a.要有初始化小蛇的方法;
+                //b.要有能够删除小蛇的方法;(删除旧蛇画一条新蛇;)
+                //c.要有能够移动一个位置的蛇的方法;(删除旧蛇画一条新蛇;吃食物变长)
+            //3.创建一个游戏对象;(游戏的开始和小蛇快跑和按键变向)
+                //a.游戏开始;
+                //b.小蛇快跑;(吃的越多跑的越快，游戏结束)
+                //c.按键变向;(能按哪些，空格暂停)
+
+            //测试代码：
+//            var map = document.getElementById("map");
+//            //创建Game对象后，这样测试;
+//            var game = new Game(map);
+//            game.start();
+
+            //最简单：
+            new Game(document.getElementById("map")).start();
+
+            //创建Game对象前的测试
+//            //创建一个食物对象，然后调用他的初始化方法;
+//            var food = new Food();
+//            food.init(map);
+//
+//            //创建一个小蛇对象; 然后调用他的初始化方法;
+//            var snake = new Snake();
+//            snake.init(map);
+//
+//            document.onclick = function () {
+//                //让蛇移动
+//                snake.snakeMove(map,food);
+//            }
+        }
+    </script>
+</head>
+<body>
+    <!--地图-->
+    <div class="map" id="map">
+        <!--需要一个食物-->
+        <!--需要一条小蛇-->
+    </div>
+</body>
+</html>
