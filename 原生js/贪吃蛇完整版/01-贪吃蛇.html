@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #map {
+            width: 120px;
+            height: 80px;
+            position: relative;
+	    border: 1px solid #000;
+            background-color: #ccc;
+        }
+        p {
+            width: 300px;
+            margin: 200px auto;
+        }
+        p button {
+            width: 100px;
+            height: 50px;
+            margin: 20px;
+            font-size: 20px;
+        }
+        .box1,.box2 {
+            width: 160px;
+            height: 50px;
+            margin: 20px;
+            position: absolute;
+            top: 230px;
+            right: 100px;
+            font-size: 20px;
+        }
+        .box2 {
+            right: 350px!important;
+        }
+
+    </style>
+    <!--引入所需的所有工具包-->
+    <script src="Snake.js" charset="UTF-8"></script>
+    <script src="Food.js" charset="UTF-8"></script>
+    <script src="Game.js" charset="UTF-8"></script>
+    <script>
+        window.onload = function () {
+            //需求: 蛇不停的移动，通过上下左右控制方向，吃到食物身体变长;
+            new Game(document.getElementById("map")).start();
+        }
+    </script>
+</head>
+<body>
+
+    <!--地图自己创建-->
+    <!--需求分析：地图里面应该有食物和蛇-->
+    <div id="map"></div>
+    <button class="box1">累计：<i>0</i>个</button>
+    <button class="box2">速度：<i>150</i>毫秒</button>
+</body>
+</html>
