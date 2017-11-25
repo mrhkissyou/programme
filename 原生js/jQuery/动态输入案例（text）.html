@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1
+            }
+            50% {
+                opacity: 0
+            }
+        }
+
+        @-webkit-keyframes blink {
+            0%,
+            100% {
+                opacity: 1
+            }
+            50% {
+                opacity: 0
+            }
+        }
+
+        @-moz-keyframes blink {
+            0%,
+            100% {
+                opacity: 1
+            }
+            50% {
+                opacity: 0
+            }
+        }
+
+        .wrap {
+            width: 1000px;
+            text-align: center;
+            margin: 100px auto 0;
+        }
+
+        .wrap h1 {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: 300;
+        }
+
+        .word {
+            font-weight: 700;
+        }
+
+        .typed-cursor {
+            opacity: 1;
+            -webkit-animation: blink .7s infinite;
+            -moz-animation: blink .7s infinite;
+            animation: blink .7s infinite;
+            display: none;
+        }
+
+        .saySection {
+            margin-top: 50px;
+        }
+
+        .saySection input {
+            font-size: 30px;
+        }
+
+        .saySection .txtSay {
+            padding-left: 10px;
+        }
+
+        .saySection .btnSay {
+            display: inline-block;
+            padding: 0 20px;
+            cursor: pointer;
+        }
+    </style>
+    <script src="jquery-1.11.1.js"></script>
+    <script>
+        $(window).load(function () {
+            //需求1: 页面加载的时候，默认一个字符串，通过定时器，一个一个添加到word里面去;
+            //需求2: 点击按钮，把input里面的内容，通过定时器，一个一个添加到word里面去;
+                    //原理：设置一个字符串和一个索引值，然后通过定时器往里面添加;
+
+            //步骤：
+            //1.页面加载的时候先显示插入条，设置字符串，索引值，定时器;
+            //2.把老字符串里面的内容根据索引值添加到新字符串中一个，然后索引值自增;
+            //3.判断，如果添加完毕就要停止定时器，隐藏插入条;
+
+            //1.页面加载的时候先显示插入条，设置字符串，索引值，定时器;
+            var timer = null;
+            fn("红鲤鱼与绿鲤鱼与驴");
+            //需求2: 点击按钮，把input里面的内容，通过定时器，一个一个添加到word里面去;
+                    //逻辑都一样，可以封装一个函数;
+            $("#btnSay").click(function () {
+                fn($("#inValue").val());
+            });
+
+
+
+
+            //封装
+            function fn(oldStr){
+                $(".typed-cursor").show();
+//                var oldStr = "红鲤鱼与绿鲤鱼与驴";
+                var newStr = "";//将来用索引值往里面添加，写入页面;
+                var index = 0;
+                //要用定时器，先求清除定时器
+                clearInterval(timer);
+                timer = setInterval(function () {
+                    //2.把老字符串里面的内容根据索引值添加到新字符串中一个，然后索引值自增;
+                    newStr += oldStr.charAt(index);//根据索引值获取字符;(charAt()/ [])
+                    //更新到div中
+                    $(".word").text(newStr);
+                    index++;
+                    //3.判断，如果添加完毕就要停止定时器，隐藏插入条;
+                    console.log(1);
+                    if(index === oldStr.length){
+                        $(".typed-cursor").hide();
+                        clearInterval(timer);
+                        //获取插入条光标
+//                        $("#inValue")[0].focus();//获取插入条光标;
+                        $("#inValue")[0].select();//选中内容;
+                    }
+                },400);
+            }
+        });
+    </script>
+</head>
+<body>
+
+
+    <div class="wrap">
+        <h1>
+            You want to say :
+            <span class="word"></span>
+            <span class="typed-cursor">|</span>
+            ！
+        </h1>
+
+        <div class="saySection">
+            <input type="text" id="inValue" class="txtSay"/>
+            <input type="button" value="Say" id="btnSay" class="btnSay"/>
+        </div>
+    </div>
+
+
+</body>
+</html>

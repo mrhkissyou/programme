@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="jquery-1.8.2.min.js"></script>
+    <script src="jquery-1.11.1.js"></script>
+    <script>
+        $(function () {
+            //有一些项目开发的比较早，可能存在多个版本的jQuery，这时怎么办？
+                //关键：不能出现后续的库层叠掉前面的库;
+//            console.log($.fn.jquery);//version
+//            console.log(jQuery.fn.jquery);//version
+
+            //让高等级的库放弃一个符号的使用权;
+//            $.noConflict();
+//            console.log($.fn.jquery);//1.8.2
+//            console.log(jQuery.fn.jquery);//1.11.1
+
+            //放弃两个符号的使用权
+            var lvchao = $.noConflict(true);//放弃两个符号的使用权
+            console.log($.fn.jquery);
+            console.log(jQuery.fn.jquery);
+            console.log(lvchao.fn.jquery);
+
+            console.log(lvchao("div"));
+            lvchao("div").on("click", function () {
+                console.log("啊，我被点击到了...")
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div>
+        你好
+    </div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        li {
+            width: 220px;
+            height: 220px;
+            margin: 15px;
+            float: left;
+            list-style: none;
+            text-align: center;
+            font: 40px/220px "simsun";
+            background-color: red;
+        }
+    </style>
+    <script src="jquery-1.11.1.js"></script>
+    <script>
+        $(window).load(function () {
+            //需求：从第一个到最后一个透明度递增;而且第一个和最后一个单独设置颜色;
+                    //遍历出来每一个单独操作;
+
+            $("li").each(function (index,ele) {
+//                console.log(index);//索引值;
+//                console.log(ele);//DOM对象;
+//                console.log("----")
+
+                //因为是DOM对象，所以需要转换为jQuery对象;
+                $(ele).css("opacity",(index+1)/10);
+
+
+                //第一个和最后一个单独上色;
+                if(index == 0){
+                    $(this).css("opacity",1);
+                    $(this).css("background","yellow");
+                }else if(index == 9){
+                    $(this).css("opacity",0.5);
+                    $(this).css("background","blue");
+                }
+            });
+
+
+            //也可以
+//            for(var i=0;i<$("li").length;i++){
+//                 $("li").eq(i);
+//            }
+
+
+        });
+    </script>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+</body>
+</html>
