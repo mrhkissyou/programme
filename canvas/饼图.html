@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<canvas width="600" height="600">浏览器版本过低,请升级</canvas>
+
+
+
+
+
+<script>
+    var canvas=document.querySelector("canvas");
+    var context=canvas.getContext("2d");
+
+    var data = [12, 40, 22, 10, 14];
+//    设置随即颜色：
+    function getColorRandom(){
+        var r=Math.floor(Math.random()*256);
+        var g=Math.floor(Math.random()*256);
+        var b=Math.floor(Math.random()*256);
+
+        return 'rgb('+r+','+g+','+b+')';
+    }
+
+//    遍历数据：
+    var sum=0;
+    data.forEach(function(data){
+//        得到数据的总和：
+        sum+=data;
+    });
+//    setInterval(function () {//画饼图不需要用定时器的
+       var startAngle=0;
+       data.forEach(function (data,i) {
+           context.beginPath();
+           context.moveTo(canvas.width/2,canvas.height/2);
+           context.arc(canvas.width/2,canvas.height/2,100,startAngle,startAngle+(data / sum * 2 * Math.PI));//终止点的角度有点小问题，没有加上起始点的角度，*2不是+2
+           context.closePath();
+           context.fillStyle=getColorRandom();
+           context.fill();
+          
+           startAngle=startAngle+(data / sum * 2 * Math.PI);//对应的使用上面的终止点角度
+       })
+//    },100)
+
+</script>
+
+</body>
+</html>
